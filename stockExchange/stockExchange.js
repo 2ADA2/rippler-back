@@ -1,6 +1,8 @@
 class StockExchange {
     price = 500
+    start = 500
     priceHistory = []
+    priceGeneralHistory = []
     min = 20
     max = 10000
 
@@ -69,7 +71,16 @@ startSimulation(stability, interval)
                 }
             }
         }
-        if(this.date.getHours()<1){
+        if(this.date.getHours()===1 && this.priceHistory.length!==0){
+            const high = Math.max(...this.priceHistory)
+            const low = Math.min(...this.priceHistory)
+            const open = this.priceHistory[0]||this.start
+            const close = this.price
+            const time = this.date.toLocaleDateString()
+            this.priceGeneralHistory.push({
+                time,open,close,low,high
+            })
+            this.priceHistory=[]
         }
         //monitoring
         if(this.date.getMinutes()===0){
@@ -78,7 +89,8 @@ startSimulation(stability, interval)
             console.log(`\ndate \t\t\t` + `price\t` + `bp\t` + `sp\t`)
             console.log(formattedDate + `\t$` + this.price.toFixed(2) +
                 `\t`+ this.bp.toFixed(2) +`\t`+ this.sp.toFixed(2)+
-                `\t`+this.percents +`\t`+this.bboost +`\t`+this.sboost, `\t`+ stability)
+                `\t`+this.percents +`\t`+this.bboost +`\t`+this.sboost, `\t`+ stability
+            + `\n`+ JSON.stringify(this.priceGeneralHistory[this.priceGeneralHistory.length-1]))
         }
 
     }, 10)
