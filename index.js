@@ -22,7 +22,7 @@ app.use("/", router);
 app.use("/", dataRouter);
 app.use("/", financeRouter);
 
-const date = new Date(2000, 0, 1)
+const date = new Date(1990, 0, 1)
 const server = http.createServer(app);
 
 // webSocket server

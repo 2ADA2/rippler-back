@@ -7,7 +7,7 @@ class SimulationExchange {
 
     start(date){
         // Crypto simulation
-        this.Crypto.Rippler.startSimulation(50, 1, date)
+        this.Crypto.Rippler.startSimulation(100, 0.01, 1000, date)
     }
 
     getCryptoData(){
