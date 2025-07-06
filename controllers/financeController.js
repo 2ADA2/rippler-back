@@ -25,7 +25,7 @@ export class FinanceController {
                     walletCount = walletData.wallet[i].count
                 }
             }
-            const operationSumm = count * data[currency].price
+            const operationSumm = count * data[currency].close
 
             if(type === "sell"){
                 if(walletCount-count < 0) {
@@ -35,6 +35,9 @@ export class FinanceController {
                 walletData.wallet[id].count = walletCount - count
 
                 walletData.wallet[0].count = euro + operationSumm
+                console.log(euro)
+                console.log(operationSumm)
+
                 const response = await Wallet.updateOne({username}, walletData)
                 res.status(200).json({
                     wallet: walletData.wallet,
