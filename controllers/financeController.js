@@ -35,8 +35,6 @@ export class FinanceController {
                 walletData.wallet[id].count = walletCount - count
 
                 walletData.wallet[0].count = euro + operationSumm
-                console.log(euro)
-                console.log(operationSumm)
 
                 const response = await Wallet.updateOne({username}, walletData)
                 res.status(200).json({
@@ -47,8 +45,10 @@ export class FinanceController {
                     response
                 })
             }else{
+                console.log(euro)
+                console.log(operationSumm)
                 if(euro - operationSumm < 0){
-                    res.status(400).json({"message": "No enough money"})
+                    return res.status(400).json({"message": "No enough money"})
                 }
 
                 walletData.wallet[id].count = walletCount + count
