@@ -3,6 +3,7 @@ import {config} from "../config.js";
 import User from "../models/User.js";
 import Wallet from "../models/Wallet.js";
 import StockConfig from "../stockExchange/stockConfig.js";
+import UserOperations from "../models/UserOperations.js";
 
 export class DataController{
     async getUserData(req, res){
@@ -38,10 +39,10 @@ export class DataController{
             data
         })
     }
-
     async getOperations(req, res){
-        const username = req.username
-        console.log(username)
+        const username = req.user.username
+        const history = await UserOperations.findOne({username})
+        res.status(200).json(history)
     }
 }
 
