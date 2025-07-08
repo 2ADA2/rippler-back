@@ -19,6 +19,10 @@ export class DataController{
         const username = decode.username
 
         const user = await User.findOne({username})
+
+        if(!user){
+            return res.status(403).json({"message": "Unauthorized"})
+        }
         const wallet = await Wallet.findOne({username})
 
         return res.status(200).json({
@@ -33,6 +37,11 @@ export class DataController{
         res.status(200).json({
             data
         })
+    }
+
+    async getOperations(req, res){
+        const username = req.username
+        console.log(username)
     }
 }
 

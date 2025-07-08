@@ -1,7 +1,6 @@
 class CurrencySimulation {
     price = 100;
-    volatility = 0; // от 0 до ~0.1 (0.02 = ±2%)
-    tickIntervalMs = 1000;
+    volatility = 0;
 
     date = new Date();
     currentCandle = null;
@@ -48,14 +47,12 @@ class CurrencySimulation {
 
     }
 
-    startSimulation(initialPrice = 1000, volatility = 0.02, tickIntervalMs = 1000, date) {
+    startSimulation(initialPrice = 1000, volatility = 0.02, date) {
         this.date = date
         this.price = initialPrice
         this.volatility = volatility
-        this.tickIntervalMs = tickIntervalMs
 
         if (this.timer) return;
-        this.timer = setInterval(() => this.processTick(), this.tickIntervalMs);
     }
 
     // getters
@@ -68,5 +65,5 @@ class CurrencySimulation {
     }
 }
 
-export default new CurrencySimulation();
+export default CurrencySimulation;
 ;
